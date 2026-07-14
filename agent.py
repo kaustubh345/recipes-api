@@ -30,19 +30,19 @@ llm = OpenAI(
 current_state= {}
 
 async def add_context_to_state(ctx: Context, gathered_contexts: str) -> str:
-    current_state = await ctx.get("state")
+    current_state = await ctx.store.get("state")
     current_state["gathered_contexts"] = gathered_contexts
     await ctx.store.set("state", current_state)
     return "Saved gathered context to state."
 
 async  def add_comment_to_state(ctx: Context, draft_comment: str) -> str:
-    current_state = await ctx.get("state")
+    current_state = await ctx.store.get("state")
     current_state["draft_comment"] = draft_comment
     await ctx.store.set("state", current_state)
     return "Saved draft comment to state."
 
 async def add_final_review_to_state(ctx: Context, final_review: str) -> str:
-    current_state = await ctx.get("state")
+    current_state = await ctx.store.get("state")
     current_state["final_review"] = final_review
     await ctx.store.set("state", current_state)
     return "Saved final review to state."
