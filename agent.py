@@ -57,7 +57,7 @@ def post_review_to_github(pr_number: int, comment: str) -> str:
     g = Github(auth=Auth.Token(token))
     repo = g.get_repo(repo_full_name)
     pr = repo.get_pull(pr_number)
-    pr.create_review(body=comment)
+    pr.create_review(body=comment, event="COMMENT")
     return f"Posted review to PR #{pr_number} in {repo_full_name}."
 
 post_review_to_github_tool = FunctionTool.from_defaults(
